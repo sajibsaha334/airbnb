@@ -24,11 +24,20 @@ user = User.create!({
     city: Faker::Address.city,
     state: Faker::Address.state,
     country: Faker::Address.country,
-    price: Money.from_amount(50, 'USD')
+    price: Money.from_amount(50, 'USD'),
+    bedroom_count: (2..5).to_a.sample,
+    bed_count: (4..10).to_a.sample,
+    guest_count: (5..20).to_a.sample,
+    bathroom_count: (1..5).to_a.sample
   })
 
   property.images.attach(io: File.open("db/images/property#{i+1}.webp"), filename: property.name)
   property.images.attach(io: File.open("db/images/property#{i+10}.webp"), filename: property.name)
+  property.images.attach(io: File.open("db/images/property5.webp"), filename: property.name)
+  property.images.attach(io: File.open("db/images/property6.webp"), filename: property.name)
+  property.images.attach(io: File.open("db/images/property7.webp"), filename: property.name)
+  property.images.attach(io: File.open("db/images/property8.webp"), filename: property.name)
+  property.images.attach(io: File.open("db/images/property9.webp"), filename: property.name)
 
   ((5..10).to_a.sample).times do
     Review.create!({

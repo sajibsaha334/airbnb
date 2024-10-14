@@ -1,6 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+
+  static targets = ['icon', 'text']
+
   updateWishlistStatus() {
     if (this.element.dataset.status === "false"){
         const propertyId = this.element.dataset.propertyId;
@@ -37,8 +40,8 @@ export default class extends Controller {
     .then(data => {
       this.element.dataset.wishlistId = data.id;
       this.element.dataset.status = "true";
-      this.element.classList.remove("fill-none");
-      this.element.classList.add("fill-primary");
+      this.iconTarget.classList.remove("fill-none");
+      this.iconTarget.classList.add("fill-primary");
       
       if (this.textTarget) {
         this.textTarget.innerText = 'Saved';
@@ -56,8 +59,8 @@ export default class extends Controller {
     .then(response => {
       this.element.dataset.wishlistId = '';
       this.element.dataset.status = "false";
-      this.element.classList.remove("fill-primary");
-      this.element.classList.add("fill-none");
+      this.iconTarget.classList.remove("fill-primary");
+      this.iconTarget.classList.add("fill-none");
 
       if (this.textTarget) {
         this.textTarget.innerText = 'Save';
