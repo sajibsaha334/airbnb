@@ -59,8 +59,7 @@
                                 <%= property.average_final_rating.round(1) %>
                             </p>
                         </div>
-                        <p class="mt-0.5 text-sm text-gray-500">Hosted by Sajib</p>
-                        <p class="mt-0.5 text-sm text-gray-500">20 - 25 Jan</p>
+                        <p class="mt-0.5 text-sm text-gray-500"><%= property.available_dates.first %> - <%= property.available_dates.last %></p>
                         <p class="mt-0.5 text-sm font-light text-gray-500"><span class="font-medium text-black"> <%= humanized_money_with_symbol(property.price) %> </span> night</p>
                     </div>
                 </div>
