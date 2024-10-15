@@ -297,7 +297,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   faker
-  image_processing (>= 1.2)
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   money-rails (~> 1.12)
