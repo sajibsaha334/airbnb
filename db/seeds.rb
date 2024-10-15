@@ -1,3 +1,5 @@
+require 'open-uri'
+
 description = <<-DESCRIPTION
 <div>Explore the nature and art oasis at our unique property. The living room, a cozy masterpiece, and the fully equipped kitchen are ideal for cooking and entertaining. Step outside to our garden patio, unwind, and enjoy morning birdsong. Tastefully decorated bedrooms, a powder room, and utility area complete the experience.<br />Note: The property is surrounded by a residential area. Despite initial surroundings, I am sure that, stepping in will fill your mood with joy and happiness.
 </div>
@@ -7,10 +9,49 @@ description = <<-DESCRIPTION
 <p>Entire Property is yours!! Wish you fun and happy stay!!</p>
 DESCRIPTION
 
+amenity1 = Amenity.create!(name: 'Kitchen')
+amenity1.icon.attach(io: File.open("app/assets/images/amenity_icons/kitchen.svg"), filename: amenity1.name)
+
+amenity2 = Amenity.create!(name: 'Private pool')
+amenity2.icon.attach(io: File.open("app/assets/images/amenity_icons/private_pool.svg"), filename: amenity2.name)
+
+amenity3 = Amenity.create!(name: 'Wifi')
+amenity3.icon.attach(io: File.open("app/assets/images/amenity_icons/wifi.svg"), filename: amenity3.name)
+
+amenity4 = Amenity.create!(name: 'Esssentials', description: 'Towels, bed sheets, soap and toilet paper')
+amenity4.icon.attach(io: File.open("app/assets/images/amenity_icons/essentials.svg"), filename: amenity4.name)
+
+pictures = []
+20.times do
+  pictures << URI.open(Faker::LoremFlickr.image)
+end
+
 user = User.create!({
   email: 'test123@gmail.com',
-  password: 'password'
+  password: 'password',
+  name: Faker::Lorem.unique.sentence(word_count: 3),
+  address_1: Faker::Address.street_address,
+  address_2: Faker::Address.street_name,
+  city: Faker::Address.city,
+  state: Faker::Address.state,
+  country: Faker::Address.country,
 })
+
+user.picture.attach(io: pictures[0], filename: user.name)
+
+19.times do |i|
+  random_user = User.create!({
+    email: "test#{i + 1}@gmail.com",
+    password: '123456',
+    name: Faker::Lorem.unique.sentence(word_count: 3),
+    address_1: Faker::Address.street_address,
+    address_2: Faker::Address.street_name,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: Faker::Address.country,
+  })
+  random_user.picture.attach(io: pictures[i+1], filename: user.name)
+end
 
 
 10.times do |i|
@@ -48,7 +89,7 @@ user = User.create!({
       location_rating: (1..5).to_a.sample,
       value_rating: (1..5).to_a.sample,
       property: property,
-      user: user
+      user: User.all.sample
     })
   end
 end

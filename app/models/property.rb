@@ -23,6 +23,31 @@ class Property < ApplicationRecord
     update_column(:average_final_rating, average_rating)
   end
 
+  def average_cleanliness_rating
+    reviews.average(:cleaniness_rating)
+  end
+
+  def average_accuracy_rating
+    reviews.average(:accuracy_rating)
+  end
+
+  def average_checkin_rating
+    reviews.average(:checkin_rating)
+  end
+
+  def average_communication_rating
+    reviews.average(:communication_rating)
+  end
+
+  def average_location_rating
+    reviews.average(:location_rating)
+  end
+
+  def average_value_rating
+    reviews.average(:value_rating)
+  end
+
+
   def wishlisted_by?(user = nil)
     return if user.nil?
 
@@ -34,13 +59,13 @@ class Property < ApplicationRecord
     current_reservation = reservations.current_reservations.first
 
     if current_reservation.nil? && next_reservation.nil?
-      Date.tomorrow.strftime('%e %b')..(Date.tomorrow + 30.days).strftime('%e %b')
+      Date.tomorrow.strftime("%e %b")..(Date.tomorrow + 30.days).strftime("%e %b")
     elsif current_reservation.nil?
-      Date.tomorrow.strftime('%e %b')..next_reservation.checkin_date.strftime('%e %b')
+      Date.tomorrow.strftime("%e %b")..next_reservation.checkin_date.strftime("%e %b")
     elsif next_reservation.nil?
-      current_reservation.checkout_date.strftime('%e %b')..(Date.tomorrow + 30.days).strftime('%e %b')
+      current_reservation.checkout_date.strftime("%e %b")..(Date.tomorrow + 30.days).strftime("%e %b")
     else
-      current_reservation.checkout_date.strftime('%e %b')..next_reservation.checkin_date.strftime('%e %b')
+      current_reservation.checkout_date.strftime("%e %b")..next_reservation.checkin_date.strftime("%e %b")
     end
   end
 end
