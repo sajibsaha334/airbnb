@@ -6,5 +6,7 @@ class PropertiesController < ApplicationController
                                       .group("ROUND(final_rating)")
                                       .count
                                       .transform_keys(&:to_i)
+
+    @overall_rating_counts.default = 0
   end
 end
