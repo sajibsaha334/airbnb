@@ -79,6 +79,11 @@ end
   property.images.attach(io: File.open("db/images/property8.webp"), filename: property.name)
   property.images.attach(io: File.open("db/images/property9.webp"), filename: property.name)
 
+  amenities_to_add = Amenity.all.sample((1..3).to_a.sample)
+  amenities_to_add.each do |amenity|
+    property.amenities << amenity unless property.amenities.include?(amenity)
+  end
+
   ((5..10).to_a.sample).times do
     Review.create!({
       content: Faker::Lorem.paragraph(sentence_count: 10),
