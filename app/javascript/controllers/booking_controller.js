@@ -77,4 +77,17 @@ export default class extends Controller {
   calculateTotalAmount(baseFair, serviceFee) {
     return parseFloat((baseFair + serviceFee).toFixed(2));
   }
+
+  reserveProperty(e) {
+    e.preventDefault();
+
+    const baseURL = e.target.dataset.reservePropertyUrl;
+    const paramsData = {
+        checkin_date: this.checkinTarget.value,
+        checkout_date: this.checkoutTarget.value
+    }
+    const paramsURL = (new URLSearchParams(paramsData)).toString();
+
+    Turbo.visit(`${baseURL}?${paramsURL}`);
+  }
 }

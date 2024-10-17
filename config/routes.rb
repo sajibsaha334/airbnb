@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   namespace :api do
-    resources  :wishlists, only: [ :create, :destroy ]
+    resources :wishlists, only: [ :create, :destroy ]
   end
 
-  resources :properties, only: [ :show ]
+  resources :properties, only: [ :show ] do
+    resources :bookings, only: [ :new ]
+  end
 end
