@@ -1,4 +1,4 @@
-# Pin npm packages by running ./bin/importmap
+# Pin npm packages by running ruby /bin/importmap pin "Package Name"
 
 pin "application"
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
@@ -9,3 +9,4 @@ pin "el-transition" # @0.0.7
 pin "swiper" # @11.1.14
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
+pin "flatpickr" # @4.6.13
