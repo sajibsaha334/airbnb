@@ -90,4 +90,19 @@ export default class extends Controller {
 
     Turbo.visit(`${baseURL}?${paramsURL}`);
   }
+
+  confirmReserve(e) {
+    e.preventDefault();
+
+    const baseURL = e.target.dataset.baseUrl;
+
+    const paramsData = {
+      property_id: e.target.dataset.propertyId,
+      checkin_date: e.target.dataset.checkinDate,
+      checkout_date: e.target.dataset.checkoutDate
+    }
+    const paramsURL = (new URLSearchParams(paramsData)).toString();
+
+    Turbo.visit(`${baseURL}?${paramsURL}`)
+  }
 }

@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   resources :properties, only: [ :show ] do
     resources :bookings, only: [ :new ]
   end
+  get "bookings/pay", to: "bookings#success"
+
+  resources :wishlists, only: [ :index ]
 end
